@@ -22,10 +22,6 @@ class pageController {
     return "not"
   }
 
-  isMeasur(val) {
-    return val ? " + " + this.measurements : ""
-  }
-
   get listInspects() {
     let html = head(this.title)
     html += `<table class="table">
@@ -47,7 +43,7 @@ class pageController {
             <td>
             <div class="wr_ico flex jcc">
             ${this.getTypeInspect(item.type)}
-            ${this.isMeasur(item.measur)}
+            ${item.measur ? " + " + this.measurements : ""}
             </div>
             </td>
             <td><a href="${this.url}/${
@@ -61,22 +57,175 @@ class pageController {
     return html
   }
 
-  get html() {
+  // ///////////////////////////////////////
+
+  header(dd, type) {
+    let html = `
+    <header class="flex jcsb aifs">
+      <div>
+        <p>
+        ${
+          type == "measurements"
+            ? dd.headers[0] + "<span>" + dd.date + "</span>"
+            : "Лист осмотра № <span class='bb'>" +
+              this.list[0].id +
+              "</span> от <span>" +
+              dd.date +
+              "</span>"
+        }
+        </p>
+        <p>${dd.fields[0].label} <span class="bb">${
+      dd.fields[0].input
+    }</span></p>
+        <p>${dd.fields[1].label} <span class="bb">${
+      dd.fields[1].input
+    }</span></p>
+        <p>Напряжение: 
+          ${dd.fields[2].label} <span class="bb">${dd.fields[2].input}</span>
+          ${dd.fields[3].label} <span class="bb">${dd.fields[3].input}</span>
+        </p>
+        <p>${dd.fields[4].label} <span class="bb">${
+      dd.fields[4].input
+    }</span></p>
+      </div>
+
+      <div class="tar">
+        <p>Согласовано: </p>
+        <p>Директор ООО "Терра"</p>
+        <p style="margin-top: 18px;"><span class="dib bb bbe mw_100">1</span> Коваленко А.В.</p>
+      </div>
+
+    </header>
+    `
+    return html
+  }
+
+  delegation(users) {
+    let html = `
+      <section class="delegation">
+        <p>${users.text}</p>
+        ${users.other
+          .map(
+            (item) => `
+            <div class="flex jcsb aifs mt_10">
+              <span class="xl_20 bb_text" data-text="Ф.И.О.">${item.fio}</span>
+              <span class="xl_20 bb_text bbe" data-text="подпись">.</span>
+              <span class="xl_20 bb_text" data-text="должность">
+                ${users.master.post === "1" ? "мастер" : "электромонтер"}
+              </span>
+              <span class="xl_20 bb_text" data-text="группа допуска">
+                ${item.groupDop}
+              </span>
+            </div>
+        `
+          )
+          .join("")}
+        <p>Ответственный: </p>
+        <div class="flex jcsb aifs">
+          <span class="xl_20 bb_text" data-text="Ф.И.О.">
+            ${users.master.fio}
+          </span>
+          <span class="xl_20 bb_text bbe" data-text="подпись">.</span>
+          <span class="xl_20 bb_text" data-text="должность">
+            ${users.master.post == "1" ? "мастер" : "электромонтер"}
+          </span>
+          <span class="xl_20 bb_text" data-text="группа допуска">
+            ${users.master.groupDop}
+          </span>
+        </div>
+      </section>
+    `
+    return html
+  }
+
+  blankMeasur(bm) {
+    console.log("measurements", bm)
+    let html = `
+            <table class="table_measur">
+            <tr>
+                <th style="padding: 5px 7px;">№</th>
+                <th>Описание точки в которой производились замеры</th>
+                <th class="xl_35" style="padding: 5px 0 0 0;">
+                    <div>Показания измерений по напряжени, V</div>
+                    <table class="xl_100" style="margin-top: 10px;">
+                        <tr style="border-top: 1px solid currentColor;">
+                            <td class="xl_50" style="padding: 1px;">U<span style="font-size: 12px;">линейное</span></td>
+                            <td class="xl_50" style="padding: 1px;">U<span style="font-size: 12px;">фазное</span></td>
+                        </tr>
+                    </table>
+                </th>
+                <th>Показания измерений по силе тока, A</th>
+            </tr>
+            ${bm.inputs
+              .map(
+                (input, index) => `
+              <tr class="tac">
+                <td style="padding: 0 7px;">${index + 1}</td>
+                <td style="padding: 0 5px;">${input[0]}</td>
+                <td style="padding: 0;">
+                    <table class="table_measur_tbl">
+                        <tr>
+                            <td class="xl_15 wsnw">A-B</td>
+                            <td class="xl_35">${input[1]}</td>
+                            <td class="xl_15 wsnw">A-N</td>
+                            <td class="xl_35">${input[2]}</td>
+                        </tr>
+                        <tr>
+                            <td class="xl_15 wsnw">B-C</td>
+                            <td class="xl_35">${input[3]}</td>
+                            <td class="xl_15 wsnw">B-N</td>
+                            <td class="xl_35">${input[4]}</td>
+                        </tr>
+                        <tr>
+                            <td class="xl_15 wsnw">C-A</td>
+                            <td class="xl_35">${input[5]}</td>
+                            <td class="xl_15 wsnw">C-N</td>
+                            <td class="xl_35">${input[6]}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="padding: 0;">
+                    <table class="table_measur_tbl">
+                        <tr>
+                            <td class="xl_30 wsnw">Фаза A</td>
+                            <td class="xl_70">${input[7]}</td>
+                        </tr>
+                        <tr>
+                            <td class="xl_30 wsnw">Фаза B</td>
+                            <td class="xl_70">${input[8]}</td>
+                        </tr>
+                        <tr>
+                            <td class="xl_30 wsnw">Фаза C</td>
+                            <td class="xl_70">${input[9]}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+              `
+              )
+              .join("")}
+            <tr>
+                <td class="tac">${bm.inputs.length + 1}</td>
+                <td>
+                    <div>Положение анцапфы (переключателя) силового трансформатора.</div>
+                    <div>При визуальной доступности!</div>
+                </td>
+                <td>${bm.lastInput}</td>
+            </tr>
+        </table>
+    `
+    return html
+  }
+
+  get inspection() {
+    console.log("master", this.list[0])
+    let DL = JSON.parse(this.list[0].DL)
     let html = head(this.title)
-    html += `<ul>
-          ${this.dirs
-            .map((dir) => `<li><a href="${dir.href}">${dir.name}</a></li>`)
-            .join("\n  ")}
-        </ul>
-        <ul>
-          ${this.files
-            .map(
-              (file) =>
-                `<li><a href="${file.href}" target="_blank">${file.name}</a></li>`
-            )
-            .join("\n  ")}
-        </ul>`
-    html += "</body></html>"
+    html += this.header(DL.delegation, this.list[0].type)
+    if (this.list[0].type == "measurements")
+      html += this.blankMeasur(DL.measurements)
+    html += this.delegation(DL.delegation.users)
+    html += "</div></body></html>"
     return html
   }
 }

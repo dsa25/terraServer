@@ -116,13 +116,21 @@ class mainController {
 
   async getInspect(req, reply) {
     try {
-      let dirs = [
-        { href: "sldkfjsd", name: "name" },
-        { href: "sldkfjsd", name: "name" },
-      ]
-      let files = [{ href: "sldkfjsd1", name: "name1" }]
-      let page = new pageController("test 404", files, dirs)
-      reply.type("text/html").send(page.html)
+      console.log(req.params.id)
+      let sql = "SELECT * FROM `inspections` WHERE id = ?"
+      let inspection = await db.query(sql, [req.params.id])
+      let html = new pageController(
+        "Осмотр",
+        inspection[0],
+        req.hostname,
+        req.url
+      )
+      reply.type("text/html").send(html.inspection)
+      // let DL = inspection[0]
+      // let dlist = DL.DL
+      // console.log(DL)
+      // console.log("dl", dlist)
+      // reply.send(DL)
     } catch (error) {
       console.log(error)
     }

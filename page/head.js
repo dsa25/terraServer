@@ -10,10 +10,24 @@ module.exports = function header(title) {
     <title>${title}</title>
     <style>
         *, ::after, ::before { box-sizing: border-box; }
+        html{
+          margin: 0;
+          padding: 0;
+        }
         body {
             min-height: 100%;
             line-height: 1.2;
+            margin: 0;
+            padding: 0;
         }
+
+        table { border-collapse: collapse; border-spacing: 0; }
+
+        .dib{display: inline-block;}
+        .db{display: block;}
+        .tac{text-align: center;}
+        .tal{text-align: left;}
+        .tar{text-align: right;}
         .flex { display: flex; }
         .inline_flex { display: inline-flex; }
         .fdc { flex-direction: column; }
@@ -48,6 +62,18 @@ module.exports = function header(title) {
         .ass { align-self: stretch; }
         .asb { align-self: baseline; }
 
+        .wsnw { white-space: nowrap; }
+        .wsnw_3p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .xl_100{width: 100%}
+        .xl_70{width: 70%}
+        .xl_50{width: 50%}
+        .xl_30{width: 30%}
+        .xl_35{width: 35%}
+        .xl_20{width: 20%}
+        .xl_15{width: 15%}
+
+        .mt_10{margin-top: 10px;}
+
         .row{margin: 0 auto; width: 100%; max-width: 960px; padding: 0 15px;}
         .table{width: 100%; text-align: center;}
         .table th,
@@ -58,6 +84,83 @@ module.exports = function header(title) {
           display: inline-block;
           height: 16px;
           margin: 0 3px
+        }
+
+
+        .delegation{
+          margin: 10px 0 30px;
+        }
+        .bb{
+          display: inline-block;
+          border-bottom: 1px solid currentColor;
+          text-align: center;
+          min-width: 50px;
+          padding: 0 5px;
+        }
+        .mw_100{min-width: 100px;}
+        .bbe{
+          text-indent: -9999px;
+        }
+        .bb_text{
+          display: block;
+          border-bottom: 1px solid currentColor;
+          text-align: center;
+          min-width: 50px;
+          padding: 0 10px;
+          position: relative;
+          white-space: nowrap;
+          margin-bottom: 25px;
+        }
+        .bb_text::after{
+          content: attr(data-text);
+          display: block;
+          position: absolute;
+          bottom: -20px;
+          left: 0;
+          width: 100%;
+          height: 16px;
+          line-height: 16px;
+          font-size: 12px;
+          text-indent: 0;
+        }
+
+        .table_measur {
+            margin: 0 0;
+            border: 1px solid currentColor;
+        }
+
+
+        .table_measur td,
+        .table_measur th {
+            padding: 5px;
+            border-right: 1px solid currentColor;
+            border-bottom: 1px solid currentColor;
+        }
+
+        .table_measur tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table_measur tr td:last-child {
+            border-right: none;
+        }
+
+        .table_measur th {
+            background-color: bisque;
+            padding-bottom: 15px;
+        }
+
+        .table_measur_tbl {
+            width: 100%;
+            text-align: center;
+        }
+
+        .table_measur .table_measur_tbl tr td {
+            border-bottom: 1px solid currentColor
+        }
+
+        .table_measur .table_measur_tbl tr:last-child td {
+            border-bottom: none;
         }
 </style>
 </head>

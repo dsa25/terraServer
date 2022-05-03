@@ -21,8 +21,8 @@ app.register((app, opts, done) => {
   // app.post("/getEditedInspects", mainController.getEditedInspects)
   // app.post("/allVers", mainController.allVers)
 
-  app.get("/inspect", mainController.getInspect)
   app.get("/list", mainController.getListInspect)
+  app.get("/list/:id", mainController.getInspect)
 
   done()
 })
