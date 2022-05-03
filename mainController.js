@@ -39,16 +39,21 @@ class mainController {
         "INSERT INTO inspections (type, v, date, status, fio, keyLS, address, measur, DL) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
       let res = await db.query(sql, args)
       if (res[0].insertId) {
-        let inspect = await db.query(
-          `SELECT * FROM inspections WHERE id =${res[0].insertId}`
-        )
-        reply.send(
-          JSON.stringify({
-            status: 1,
-            body: inspect[0],
-            msg: "Осмотр сохранен в бд!",
-          })
-        )
+        let file = `${req.hostname}/list/${res[0].insertId}`
+        let sql2 = "UPDATE inspections SET file= ? WHERE id= ?"
+        let res2 = await db.query(sql2, [file, res[0].insertId])
+        if (res2[0].changedRows == 1) {
+          let inspect = await db.query(
+            `SELECT * FROM inspections WHERE id =${res[0].insertId}`
+          )
+          reply.send(
+            JSON.stringify({
+              status: 1,
+              body: inspect[0],
+              msg: "Осмотр сохранен в бд!",
+            })
+          )
+        }
       }
       reply.send(
         JSON.stringify({ status: 0, body: {}, msg: "Что то пошло не так!" })

@@ -15,7 +15,7 @@ class pageController {
   measurements =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M365.3 93.38l-74.63-74.64C278.6 6.742 262.3 0 245.4 0L64-.0001c-35.35 0-64 28.65-64 64l.0065 384c0 35.34 28.65 64 64 64H320c35.2 0 64-28.8 64-64V138.6C384 121.7 377.3 105.4 365.3 93.38zM336 448c0 8.836-7.164 16-16 16H64.02c-8.838 0-16-7.164-16-16L48 64.13c0-8.836 7.164-16 16-16h160L224 128c0 17.67 14.33 32 32 32h79.1V448zM96 280C96 293.3 106.8 304 120 304h144C277.3 304 288 293.3 288 280S277.3 256 264 256h-144C106.8 256 96 266.8 96 280zM264 352h-144C106.8 352 96 362.8 96 376s10.75 24 24 24h144c13.25 0 24-10.75 24-24S277.3 352 264 352z"/></svg>'
 
-  getTypeInspect(type) {
+  getIcon(type) {
     if (type == "mastTransformer") return this.mastTransformer
     if (type == "buildingPart") return this.buildingPart
     if (type == "measurements") return this.measurements
@@ -42,7 +42,7 @@ class pageController {
             <td>${item.address}</td>
             <td>
             <div class="wr_ico flex jcc">
-            ${this.getTypeInspect(item.type)}
+            ${this.getIcon(item.type)}
             ${item.measur ? " + " + this.measurements : ""}
             </div>
             </td>
@@ -139,7 +139,6 @@ class pageController {
   }
 
   blankMeasur(bm) {
-    console.log("measurements", bm)
     let html = `
             <table class="table_measur">
             <tr>
@@ -217,13 +216,167 @@ class pageController {
     return html
   }
 
+  listCheckboxText(answer) {
+    let result = answer.text
+    answer.checkbox.forEach((item) => {
+      if (item.check == true) {
+        result = result.replace(
+          new RegExp(item.text, "g"),
+          `<span class="span_check">${item.text}</span>`
+        )
+      }
+    })
+    return result
+  }
+
+  typeAnswer(answer) {
+    if (answer.type == "text") {
+      return `<div>
+        <input type="checkbox" disabled class="checkbox" ${
+          answer.check == true ? "checked" : ""
+        }>
+        <label>${answer.text}</label>
+      </div>`
+    }
+
+    if (answer.type == "input") {
+      return `<div>
+        <input type="checkbox" disabled class="checkbox" ${
+          answer.check == true ? "checked" : ""
+        }>
+        <label><span class="bb mw_100">${answer.input}</span></label>
+      </div>`
+    }
+
+    if (answer.type == "textInput") {
+      return `<div>
+        <input type="checkbox" disabled class="checkbox" ${
+          answer.check == true ? "checked" : ""
+        }>
+        <label>${answer.text} <span class="bb">${answer.input}</span></label>
+      </div>`
+    }
+
+    if (answer.type == "radio") {
+      return `<div>
+        <input type="checkbox" disabled class="checkbox" ${
+          answer.check == true ? "checked" : ""
+        }>
+        <label>${
+          answer.check == true
+            ? answer.text.replace(
+                new RegExp(answer.radio.list[answer.radio.value], "g"),
+                `<span class="span_check">${
+                  answer.radio.list[answer.radio.value]
+                }</span>`
+              )
+            : answer.text
+        }</label>
+      </div>`
+    }
+
+    if (answer.type == "radioInput") {
+      return `<div>
+            <input type="checkbox" disabled class="checkbox" ${
+              answer.check == true ? "checked" : ""
+            }>
+            <label>${
+              answer.check == true
+                ? answer.text.replace(
+                    new RegExp(answer.radio.list[answer.radio.value], "g"),
+                    `<span class="span_check">${
+                      answer.radio.list[answer.radio.value]
+                    }</span>`
+                  )
+                : answer.text
+            } <span class="bb">${answer.input}</span></label>
+                  </div>`
+    }
+
+    if (answer.type == "checkbox") {
+      return `<div>
+      <input type="checkbox" disabled class="checkbox" ${
+        answer.check == true ? "checked" : ""
+      }>
+        <label>${
+          answer.check == true ? this.listCheckboxText(answer) : answer.text
+        }</label>
+      </div>`
+    }
+
+    if (answer.type == "listTextInput") {
+      return `
+      <div>${answer.text} </div>
+      ${answer.list
+        .map(
+          (item) =>
+            `<label class="label_input">${item.text} <span class="bb mw_100">${item.input}</span></label>`
+        )
+        .join("")}
+      `
+    }
+
+    return ""
+  }
+
+  getHeadTbl(headers, id) {
+    let head = headers.filter((item) => item.index[0] == id)
+    let html = ""
+    if (head.length != 0) {
+      html = `
+        <tr>
+          <th class="xl_10"></th>
+          <th class="xl_50">${head[0].title}</th>
+          <th class="xl_40"></th>
+        </tr>
+      `
+    }
+    return html
+  }
+
+  quests(quests) {
+    // console.log("dl", quests)
+    let html = `
+    <table class="table_quests">
+      <tr>
+          <th class="tac xl_10">№</th>
+          <th class="xl_50">${quests.name}</th>
+          <th class="xl_40 tac">Результат осмотра</th>
+      </tr>
+      ${quests.questions
+        .map(
+          (quest) => `
+          ${this.getHeadTbl(quests.headers, quest.id)}
+        <tr>
+          <td class="tac xl_10">${quest.id}</td>
+          <td class="xl_50">${quest.quest}</td>
+          <td class="xl_40">
+              ${quest.opt.map((item) => this.typeAnswer(item)).join("")}
+            </td>
+        </tr>
+      `
+        )
+        .join("")}
+
+    </table>
+    `
+    return html
+  }
+
   get inspection() {
-    console.log("master", this.list[0])
+    console.log("host", this.hostname)
+    // console.log("master", this.list[0])
     let DL = JSON.parse(this.list[0].DL)
     let html = head(this.title)
     html += this.header(DL.delegation, this.list[0].type)
-    if (this.list[0].type == "measurements")
+
+    if (this.list[0].type == "measurements") {
       html += this.blankMeasur(DL.measurements)
+    } else {
+      html += this.quests(DL.quests)
+      if (this.list[0].measur === 1) html += this.blankMeasur(DL.measurements)
+    }
+
     html += this.delegation(DL.delegation.users)
     html += "</div></body></html>"
     return html
