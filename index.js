@@ -1,16 +1,11 @@
 require("dotenv").config()
-const app = require("fastify")({ logger: false })
-const path = require("path")
+const app = require("fastify")({ trustProxy: true, logger: false })
 const pool = require("./db")
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 80
+const IP = process.env.IP || "192.168.0.101"
 const mainController = require("./mainController")
 
 app.register(require("@fastify/cors"))
-
-// app.register(require("@fastify/static"), {
-//   root: path.join(__dirname, "public"),
-//   prefix: "/public/",
-// })
 
 app.register((app, opts, done) => {
   app.post("/users", mainController.getUsers)
@@ -24,6 +19,14 @@ app.register((app, opts, done) => {
   app.get("/list", mainController.getListInspect)
   app.get("/list/:id", mainController.getInspect)
 
+  app.get("/", (req, reply) => {
+    console.log("ip", req.ip)
+    console.log("ips", req.ips)
+    console.log("hostname", req.hostname)
+    console.log("protocol", req.protocol)
+    reply.send("test")
+  })
+
   done()
 })
 
@@ -32,7 +35,7 @@ let time = new Date()
 const start = async () => {
   try {
     await pool.getConnection()
-    await app.listen(PORT, (err, address) => {
+    await app.listen(PORT, IP, (err, address) => {
       console.log(
         `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()} server: ${address}`
       )
