@@ -125,17 +125,12 @@ class mainController {
       let sql = "SELECT * FROM `inspections` WHERE id = ?"
       let inspection = await db.query(sql, [req.params.id])
       let html = new pageController(
-        "Осмотр",
+        "осмотр",
         inspection[0],
         req.hostname,
         req.url
       )
       reply.type("text/html").send(html.inspection)
-      // let DL = inspection[0]
-      // let dlist = DL.DL
-      // console.log(DL)
-      // console.log("dl", dlist)
-      // reply.send(DL)
     } catch (error) {
       console.log(error)
     }

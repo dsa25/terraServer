@@ -367,7 +367,12 @@ class pageController {
     console.log("host", this.hostname)
     // console.log("master", this.list[0])
     let DL = JSON.parse(this.list[0].DL)
-    let html = head(this.title)
+    let title = `${
+      this.list[0].type == "measurements"
+        ? "Бланк замеров № "
+        : "Лист осмотра № "
+    } ${this.list[0].id} от ${this.list[0].date} ${this.list[0].address}`
+    let html = head(title)
     html += this.header(DL.delegation, this.list[0].type)
 
     if (this.list[0].type == "measurements") {
