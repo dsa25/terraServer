@@ -74,7 +74,13 @@ module.exports = function header(title) {
 
         .mt_10{margin-top: 10px;}
 
-        .row{margin: 0 auto; width: 100%; max-width: 960px; padding: 0 15px;}
+        .row{
+            margin: 0 auto; 
+            width: 100%; 
+            max-width: 21cm; 
+            min-width: 21cm; 
+            padding: 0 15px;
+        }
         .table{width: 100%; text-align: center;}
         .table th,
         .table td{padding: 3px 5px;}
@@ -104,25 +110,36 @@ module.exports = function header(title) {
         }
         .bb_text{
           display: block;
-          border-bottom: 1px solid currentColor;
+        //   border-bottom: 1px solid currentColor;
           text-align: center;
           min-width: 50px;
-          padding: 0 10px;
+          padding: 0 10px 25px;
           position: relative;
           white-space: nowrap;
-          margin-bottom: 25px;
+          height: 16px;
+        //   margin-bottom: 25px;
         }
         .bb_text::after{
           content: attr(data-text);
           display: block;
           position: absolute;
-          bottom: -20px;
+          top: 22px;
           left: 0;
           width: 100%;
           height: 16px;
           line-height: 16px;
           font-size: 12px;
           text-indent: 0;
+        }
+        .bb_text::before{
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            height: 1px;
+            width: 100%;
+            border-bottom: 1px solid currentColor;
+            top: 20px;
         }
 
         .table_measur {
@@ -251,6 +268,32 @@ module.exports = function header(title) {
         display: block;
         margin: 5px 0;
       }
+
+
+
+    @media print {
+        * {
+            // -webkit-print-color-adjust: exact !important;   
+            // color-adjust: exact !important;  
+            // box-shadow: none;
+            // text-shadow: none;            
+        }
+        // html, body{
+        //     height: 297mm;
+        //     width: 210mm;
+        // }
+        // @page {
+        //     margin: 10mm 10mm 10mm 20mm;
+        // }
+        // ul, ol, table,
+        //  span,
+        //  span::after {
+        //     page-break-inside: avoid;
+        // }
+    }
+
+
+
 </style>
 </head>
 

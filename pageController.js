@@ -209,7 +209,7 @@ class pageController {
                     <div>Положение анцапфы (переключателя) силового трансформатора.</div>
                     <div>При визуальной доступности!</div>
                 </td>
-                <td>${bm.lastInput}</td>
+                <td colspan="2" class="tac">${bm.lastInput}</td>
             </tr>
         </table>
     `

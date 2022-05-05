@@ -6,7 +6,13 @@ class mainController {
     try {
       let sql = "SELECT * FROM `users` WHERE status = 1"
       let users = await db.query(sql)
-      reply.send(JSON.stringify(users[0]))
+      reply.send(
+        JSON.stringify({
+          status: 1,
+          body: users[0],
+          msg: "Список пользователей!",
+        })
+      )
     } catch (error) {
       console.log(error)
     }
@@ -100,7 +106,11 @@ class mainController {
         )
       }
       reply.send(
-        JSON.stringify({ status: 0, body: res[0], msg: "Что то пошло не так!" })
+        JSON.stringify({
+          status: 0,
+          body: res[0],
+          msg: "Что то пошло не так!",
+        })
       )
     } catch (error) {
       console.log(error)
@@ -113,7 +123,13 @@ class mainController {
       let inspections = await db.query(sql)
       // setTimeout(() => {
       // }, 2000)
-      reply.send(JSON.stringify(inspections[0]))
+      reply.send(
+        JSON.stringify({
+          status: 1,
+          body: inspections[0],
+          msg: "Список осмотров",
+        })
+      )
     } catch (error) {
       console.log(error)
     }
@@ -151,8 +167,6 @@ class mainController {
         req.url
       )
       reply.type("text/html").send(html.listInspects)
-      reply.send(JSON.stringify(listInspects[0]))
-      // reply.type("text/html").send(page.html)
     } catch (error) {
       console.log(error)
     }
