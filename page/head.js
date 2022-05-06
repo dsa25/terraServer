@@ -116,14 +116,14 @@ module.exports = function header(title) {
           padding: 0 10px 25px;
           position: relative;
           white-space: nowrap;
-          height: 16px;
-        //   margin-bottom: 25px;
+          height: 18px;
+          margin-bottom: 5px;
         }
         .bb_text::after{
           content: attr(data-text);
           display: block;
           position: absolute;
-          top: 22px;
+          top: 23px;
           left: 0;
           width: 100%;
           height: 16px;
@@ -139,7 +139,7 @@ module.exports = function header(title) {
             height: 1px;
             width: 100%;
             border-bottom: 1px solid currentColor;
-            top: 20px;
+            top: 23px;
         }
 
         .table_measur {

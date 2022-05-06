@@ -68,7 +68,7 @@ class pageController {
           type == "measurements"
             ? dd.headers[0] + "<span>" + dd.date + "</span>"
             : "Лист осмотра № <span class='bb'>" +
-              this.list[0].id +
+              this.list.id +
               "</span> от <span>" +
               dd.date +
               "</span>"
@@ -365,21 +365,19 @@ class pageController {
 
   get inspection() {
     console.log("host", this.hostname)
-    // console.log("master", this.list[0])
-    let DL = JSON.parse(this.list[0].DL)
+    // console.log("master", this.list)
+    let DL = JSON.parse(this.list.DL)
     let title = `${
-      this.list[0].type == "measurements"
-        ? "Бланк замеров № "
-        : "Лист осмотра № "
-    } ${this.list[0].id} от ${this.list[0].date} ${this.list[0].address}`
+      this.list.type == "measurements" ? "Бланк замеров № " : "Лист осмотра № "
+    } ${this.list.id} от ${this.list.date} ${this.list.address}`
     let html = head(title)
-    html += this.header(DL.delegation, this.list[0].type)
+    html += this.header(DL.delegation, this.list.type)
 
-    if (this.list[0].type == "measurements") {
+    if (this.list.type == "measurements") {
       html += this.blankMeasur(DL.measurements)
     } else {
       html += this.quests(DL.quests)
-      if (this.list[0].measur === 1) html += this.blankMeasur(DL.measurements)
+      if (this.list.measur === 1) html += this.blankMeasur(DL.measurements)
     }
 
     html += this.delegation(DL.delegation.users)
