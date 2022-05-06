@@ -2,7 +2,7 @@ require("dotenv").config()
 const app = require("fastify")({ trustProxy: true, logger: false })
 // const { pool } = require("./database/db")
 const { opn } = require("./database/db")
-const { sequelize } = require("./database/db")
+// const { sequelize } = require("./database/db")
 const PORT = process.env.PORT || 80
 const IP = process.env.IP || "192.168.0.101"
 const mainController = require("./mainController")
