@@ -1,12 +1,12 @@
-const mysql = require("mysql2/promise")
-require("dotenv").config()
+// const mysql = require("mysql2/promise")
+// require("dotenv").config()
 
 const sqlite3 = require("sqlite3")
 const { open } = require("sqlite")
 
 const { Sequelize, DataTypes } = require("sequelize")
 
-const file_db_sqlite = "./dataBase/terra312.db"
+const file_db_sqlite = "./database/terra.db"
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
@@ -23,13 +23,13 @@ const sequelize = new Sequelize({
 //   }
 // )
 
-const pool = mysql.createPool({
-  connectionLimit: 5,
-  host: "localhost",
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-})
+// const pool = mysql.createPool({
+//   connectionLimit: 5,
+//   host: "localhost",
+//   database: process.env.DB_NAME,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+// })
 
 const opn = async () => {
   return open({
@@ -38,4 +38,8 @@ const opn = async () => {
   })
 }
 
-module.exports = { pool, opn, sequelize }
+module.exports = {
+  // pool,
+  opn,
+  sequelize,
+}

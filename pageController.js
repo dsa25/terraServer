@@ -1,4 +1,4 @@
-const head = require("./page/head")
+const head = require("./head")
 
 class pageController {
   constructor(title, list, hostname, url) {

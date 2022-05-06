@@ -1,5 +1,5 @@
-let { opn } = require("./db")
-// let { pool } = require("./db")
+let { opn } = require("./database/db")
+// let { pool } = require("./database/db")
 // const db = pool
 const pageController = require("./pageController")
 

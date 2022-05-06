@@ -1,8 +1,8 @@
 require("dotenv").config()
 const app = require("fastify")({ trustProxy: true, logger: false })
-// const { pool } = require("./db")
-const { opn } = require("./db")
-// const { sequelize } = require("./db")
+// const { pool } = require("./database/db")
+const { opn } = require("./database/db")
+const { sequelize } = require("./database/db")
 const PORT = process.env.PORT || 80
 const IP = process.env.IP || "192.168.0.101"
 const mainController = require("./mainController")
@@ -64,8 +64,8 @@ start()
 // or
 
 // модели для синхронизации
-// const Inspection = require("./models/inspection")
-// const Users = require("./models/users")
+// const Inspection = require("./database/inspection")
+// const Users = require("./database/users")
 // синхронизация  бд c моделями
 // sequelize
 //   .sync({ alter: true })
