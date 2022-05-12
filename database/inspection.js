@@ -38,6 +38,10 @@ const Inspection = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    tprp: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     measur: {
       type: DataTypes.INTEGER,
       allowNull: false,

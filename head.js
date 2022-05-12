@@ -19,6 +19,7 @@ module.exports = function header(title) {
             line-height: 1.2;
             margin: 0;
             padding: 0;
+            font-family: sans-serif;
         }
 
         table { border-collapse: collapse; border-spacing: 0; }
@@ -85,7 +86,13 @@ module.exports = function header(title) {
         .table th,
         .table td{padding: 3px 5px;}
         .table tr:not(:first-child):hover{opacity: 0.7}
-        .table .wr_ico{}
+        .table tr td:nth-child(1){width: 50px;}
+        .table tr td:nth-child(2){width: 112px;}
+        .table tr td:nth-child(3){width: 177px;}
+        .table tr td:nth-child(4){width: 177px;}
+        .table tr td:nth-child(5){width: 83px;}
+        .table tr td:nth-child(6){width: 104px;}
+        .table tr td:nth-child(7){width: 63px;}
         .table .wr_ico svg{
           display: inline-block;
           height: 16px;
@@ -267,6 +274,25 @@ module.exports = function header(title) {
       .label_input{
         display: block;
         margin: 5px 0;
+      }
+
+      .input_text{
+          display: block;
+          max-width: 100%;
+          width: 130px;
+          margin: 0 auto;
+          padding: 3px 4px;
+          border-radius: 3px;
+          border: 1px solid #ccc !important;
+      }
+      .input_text#id{width: 30px;}
+      .input_text#date{width: 80px;}
+      .input_text#tprp{width: 40px;}
+
+      .btn{
+        display: inline-block;
+        padding: 2px 5px;
+        cursor: pointer;
       }
 
 

@@ -9,11 +9,11 @@ class pageController {
   }
 
   buildingPart =
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.6 483.2 483.9 512 448.5 512H326.4L288 448L368.8 380.7C376.6 374.1 376.5 362.1 368.5 355.8L250.6 263.2C235.1 251.7 216.8 270.1 227.8 285.2L288 368L202.5 439.2C196.5 444.3 194.1 452.1 199.1 459.8L230.4 512H128.1C92.75 512 64.09 483.3 64.09 448V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L416 100.7V64C416 46.33 430.3 32 448 32H480C497.7 32 512 46.33 512 64V185L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z"/></svg>'
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.6 483.2 483.9 512 448.5 512H326.4L288 448L368.8 380.7C376.6 374.1 376.5 362.1 368.5 355.8L250.6 263.2C235.1 251.7 216.8 270.1 227.8 285.2L288 368L202.5 439.2C196.5 444.3 194.1 452.1 199.1 459.8L230.4 512H128.1C92.75 512 64.09 483.3 64.09 448V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L416 100.7V64C416 46.33 430.3 32 448 32H480C497.7 32 512 46.33 512 64V185L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z" fill="currentColor" /></svg>'
   mastTransformer =
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M381.2 172.8C377.1 164.9 368.9 160 360 160h-156.6l50.84-127.1c2.969-7.375 2.062-15.78-2.406-22.38S239.1 0 232 0h-176C43.97 0 33.81 8.906 32.22 20.84l-32 240C-.7179 267.7 1.376 274.6 5.938 279.8C10.5 285 17.09 288 24 288h146.3l-41.78 194.1c-2.406 11.22 3.469 22.56 14 27.09C145.6 511.4 148.8 512 152 512c7.719 0 15.22-3.75 19.81-10.44l208-304C384.8 190.2 385.4 180.7 381.2 172.8z"/></svg>'
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M381.2 172.8C377.1 164.9 368.9 160 360 160h-156.6l50.84-127.1c2.969-7.375 2.062-15.78-2.406-22.38S239.1 0 232 0h-176C43.97 0 33.81 8.906 32.22 20.84l-32 240C-.7179 267.7 1.376 274.6 5.938 279.8C10.5 285 17.09 288 24 288h146.3l-41.78 194.1c-2.406 11.22 3.469 22.56 14 27.09C145.6 511.4 148.8 512 152 512c7.719 0 15.22-3.75 19.81-10.44l208-304C384.8 190.2 385.4 180.7 381.2 172.8z" fill="currentColor" /></svg>'
   measurements =
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M365.3 93.38l-74.63-74.64C278.6 6.742 262.3 0 245.4 0L64-.0001c-35.35 0-64 28.65-64 64l.0065 384c0 35.34 28.65 64 64 64H320c35.2 0 64-28.8 64-64V138.6C384 121.7 377.3 105.4 365.3 93.38zM336 448c0 8.836-7.164 16-16 16H64.02c-8.838 0-16-7.164-16-16L48 64.13c0-8.836 7.164-16 16-16h160L224 128c0 17.67 14.33 32 32 32h79.1V448zM96 280C96 293.3 106.8 304 120 304h144C277.3 304 288 293.3 288 280S277.3 256 264 256h-144C106.8 256 96 266.8 96 280zM264 352h-144C106.8 352 96 362.8 96 376s10.75 24 24 24h144c13.25 0 24-10.75 24-24S277.3 352 264 352z"/></svg>'
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M365.3 93.38l-74.63-74.64C278.6 6.742 262.3 0 245.4 0L64-.0001c-35.35 0-64 28.65-64 64l.0065 384c0 35.34 28.65 64 64 64H320c35.2 0 64-28.8 64-64V138.6C384 121.7 377.3 105.4 365.3 93.38zM336 448c0 8.836-7.164 16-16 16H64.02c-8.838 0-16-7.164-16-16L48 64.13c0-8.836 7.164-16 16-16h160L224 128c0 17.67 14.33 32 32 32h79.1V448zM96 280C96 293.3 106.8 304 120 304h144C277.3 304 288 293.3 288 280S277.3 256 264 256h-144C106.8 256 96 266.8 96 280zM264 352h-144C106.8 352 96 362.8 96 376s10.75 24 24 24h144c13.25 0 24-10.75 24-24S277.3 352 264 352z" fill="currentColor"/></svg>'
 
   getIcon(type) {
     if (type == "mastTransformer") return this.mastTransformer
@@ -22,39 +22,170 @@ class pageController {
     return "not"
   }
 
-  get listInspects() {
-    let html = head(this.title)
-    html += `<table class="table">
-        <tr>
-        <th>№</th>
-        <th>Дата</th>
-        <th>ФИО</th>
-        <th>Адресс</th>
-        <th>Тип</th>
-        <th>Файл</th>
+  getScript() {
+    return `
+      <script>
+
+function debounce(f, ms) {
+  let isCooldown = false;
+  return function() {
+    if (isCooldown) return;
+    f.apply(this, arguments);
+    isCooldown = true;
+    setTimeout(() => isCooldown = false, ms);
+  };
+}
+
+function throttle(func, ms) {
+  let isThrottled = false,
+    savedArgs,
+    savedThis;
+  function wrapper() {
+    if (isThrottled) { // (2)
+      savedArgs = arguments;
+      savedThis = this;
+      return;
+    }
+    func.apply(this, arguments); // (1)
+    isThrottled = true;
+    setTimeout(function() {
+      isThrottled = false; // (3)
+      if (savedArgs) {
+        wrapper.apply(savedThis, savedArgs);
+        savedArgs = savedThis = null;
+      }
+    }, ms);
+  }
+  return wrapper;
+}
+
+      let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+        const myFetch = async (url, data = [], method = "POST") => {
+          try {
+            let response = await fetch(url, {
+              method: method,
+              headers: {
+                "Content-Type": "application/json;charset=utf-8",
+              },
+              body: JSON.stringify(data),
+            })
+            if (response != undefined) {
+              let result = await response.json()
+              return result
+            } else {
+              return alert("Ошибка подключения к _серверу!")
+            }
+          } catch (error) {
+            console.log("error", error)
+            alert("Ошибка подключения к серверу!")
+          }
+        }
+
+        const func = async (event) => {
+          if(event.target.id == 'btn' || event.target.className == 'input_text'){
+
+            let data = {
+              id: id.value,
+              date: date.value,
+              fio: fio.value,
+              address: address.value,
+              tprp: tprp.value
+            }
+        
+              let res = await myFetch("http://${this.hostname}/filterInspects", data)
+              if (res?.status == 1) {
+                while (table.rows.length > 2) {
+                  table.deleteRow(2);
+                }
+                table.rows[1].insertAdjacentHTML("afterEnd", res.body.html)
+              } else {
+                alert("ошибка подключения к серверу!")
+              }
+
+          }
+        }
+
+        let f700 = throttle(func, 700);
+        let f1000 = throttle(func, 1000);
+
+        function events(){
+          btn.addEventListener('click', f1000, false)
+          document.addEventListener('input', f700, false)
+        }
+        events()
+
+      </script>
+    `
+  }
+
+  formFilter() {
+    return `<tr>
+          <th>№</th>
+          <th>Дата</th>
+          <th>ФИО</th>
+          <th>Адресс</th>
+          <th>ТП(РП)</th>
+          <th>Тип</th>
+          <th>Файл</th>
         </tr>
-        ${this.list
-          .map(
-            (item) => `<tr>
+        <tr>
+          <td><input id="id" class="input_text" type="text" value=""></td>
+          <td><input id="date" class="input_text" type="text" value=""></td>
+          <td><input id="fio" class="input_text" type="text" value=""></td>
+          <td><input id="address" class="input_text" type="text" value=""></td>
+          <td><input id="tprp" class="input_text" type="text" value=""></td>
+          <td colspan="2"><button id='btn' class="btn" >применить</button></td>
+        </tr>`
+  }
+
+  trList() {
+    return `${
+      this.list.length > 0
+        ? this.list
+            .map(
+              (item) => `<tr>
             <td>${item.id}</td>
             <td>${item.date}</td>
             <td>${item.fio}</td>
             <td>${item.address}</td>
+            <td>${item.tprp}</td>
             <td>
-            <div class="wr_ico flex jcc">
-            ${this.getIcon(item.type)}
-            ${item.measur ? " + " + this.measurements : ""}
-            </div>
+              <div class="flex jcc">
+                <span style="width: 30%;">${
+                  item.type == "measurements" ? "БЗ " : "ЛО "
+                } </span>
+                <div class="wr_ico flex jcc" style="width: 70%; color: #4e5f68">
+                  ${this.getIcon(item.type)}
+                  ${item.measur ? " + " + this.measurements : ""}
+                </div>
+              </div>
             </td>
             <td><a href="${this.url}/${
-              item.id
-            }">file</a> <span style="font-size: 12px;">v:${item.v}</span></td>
+                item.id
+              }">file</a> <span style="font-size: 12px;">v:${item.v}</span></td>
         </tr>`
-          )
-          .join("")}
-      </table>`
+            )
+            .join("")
+        : '<tr><td colspan="7" style="padding: 5px;">ничего не найдено</td></tr>'
+    }`
+  }
+
+  get listInspects() {
+    let html = head(this.title)
+
+    html += '<table id="table" class="table">'
+    html += this.formFilter()
+    html += this.trList()
+    html += "</table>"
+
+    html += this.getScript()
     html += "</div></body></html>"
     return html
+  }
+
+  get filterInspects() {
+    return this.trList()
   }
 
   // ///////////////////////////////////////
@@ -367,9 +498,9 @@ class pageController {
     console.log("host", this.hostname)
     // console.log("master", this.list)
     let DL = JSON.parse(this.list.DL)
-    let title = `${
-      this.list.type == "measurements" ? "Бланк замеров № " : "Лист осмотра № "
-    } ${this.list.id} от ${this.list.date} ${this.list.address}`
+    let title = `${this.list.type == "measurements" ? "БЗ № " : "ЛО № "} ${
+      this.list.id
+    } от ${this.list.date} ${this.list.address}`
     let html = head(title)
     html += this.header(DL.delegation, this.list.type)
 

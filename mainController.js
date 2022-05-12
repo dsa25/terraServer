@@ -180,11 +180,12 @@ class mainController {
         req.body.fio,
         req.body.keyLS,
         req.body.address,
+        req.body.tprp,
         req.body.measur,
         DL,
       ]
       let sql =
-        "INSERT INTO inspections (type, v, date, status, fio, keyLS, address, measur, DL) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO inspections (type, v, date, status, fio, keyLS, address, tprp, measur, DL) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
       let db = await opn()
       let res = await db.run(sql, args)
       if (res != undefined && res.lastID > 0) {
@@ -232,12 +233,13 @@ class mainController {
         req.body.fio,
         req.body.keyLS,
         req.body.address,
+        req.body.tprp,
         req.body.measur,
         DL,
         req.body.id,
       ]
       let sql =
-        "UPDATE inspections SET type= ?, v= ?, date= ?, status= ?, fio= ?, keyLS= ?, address= ?, measur= ?, DL= ? WHERE id= ?"
+        "UPDATE inspections SET type= ?, v= ?, date= ?, status= ?, fio= ?, keyLS= ?, address= ?,  tprp= ?, measur= ?, DL= ? WHERE id= ?"
       let db = await opn()
       let res = await db.run(sql, args)
       if (res && res?.changes == 1) {
@@ -280,7 +282,7 @@ class mainController {
       console.log(req.hostname)
       console.log(req.url)
       let sql =
-        "SELECT id, type, date, v, fio, keyLS, address, measur FROM `inspections` ORDER BY `id` DESC"
+        "SELECT id, type, date, v, fio, keyLS, address, tprp, measur FROM `inspections` ORDER BY `id` DESC"
       let db = await opn()
       let listInspects = await db.all(sql)
       let html = new pageController(
@@ -306,6 +308,61 @@ class mainController {
         JSON.stringify({
           status: 1,
           body: inspections,
+          msg: "Список осмотров",
+        })
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async filterInspects(req, reply) {
+    try {
+      if (
+        req.body == undefined ||
+        req.body.id == undefined ||
+        req.body.date == undefined ||
+        req.body.fio == undefined ||
+        req.body.tprp == undefined ||
+        req.body.address == undefined
+      ) {
+        reply.send(
+          JSON.stringify({
+            status: 0,
+            body: {},
+            msg: "Не передан необходимый параметр!",
+          })
+        )
+      }
+      let id = req.body.id.trim()
+      let date = req.body.date.trim()
+      let fio = req.body.fio.trim()
+      let address = req.body.address.trim()
+      let tprp = req.body.tprp.trim()
+
+      let likes = []
+      if (id != "") likes.push(`id LIKE '%${id}%'`)
+      if (date != "") likes.push(`date LIKE '%${date}%'`)
+      if (fio != "") likes.push(`fio LIKE '%${fio}%'`)
+      if (address != "") likes.push(`address LIKE '%${address}%'`)
+      if (tprp != "") likes.push(`tprp LIKE '%${tprp}%'`)
+
+      let filter = likes.join(" AND ")
+      if (filter != "") filter = `WHERE ${filter}`
+
+      let sql = `SELECT id, type, date, v, fio, keyLS, address, tprp, measur FROM inspections ${filter} ORDER BY id DESC`
+      let db = await opn()
+      let inspections = await db.all(sql)
+      let html = new pageController(
+        "Список осмотров",
+        inspections,
+        req.hostname,
+        req.url
+      )
+      reply.send(
+        JSON.stringify({
+          status: 1,
+          body: { html: html.filterInspects },
           msg: "Список осмотров",
         })
       )
