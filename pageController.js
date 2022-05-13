@@ -189,6 +189,156 @@ function throttle(func, ms) {
   }
 
   // ///////////////////////////////////////
+  trUser() {
+    return `${
+      this.list.length > 0
+        ? this.list
+            .map(
+              (item) => `
+              <form id="form_${item.id}" class="user flex jscb aic">
+                <div class="xl_10">${item.id}</div>
+                <div class="xl_20"><input name="fio" type="text" class="input_text" value="${
+                  item.fio
+                }"></div>
+                <div class="xl_20">
+                  <select class="select" name="post">
+                    <option value="0" ${
+                      item.post == 0 && "selected"
+                    }>электромонтер</option>
+                    <option value="1" ${
+                      item.post == 1 && "selected"
+                    }>мастер</option>
+                  </select>
+                </div>
+                <div class="xl_20"><input  name="groupDop" type="text" class="input_text gd" value="${
+                  item.groupDop
+                }"></div>
+                <div class="xl_15">
+                  <select class="select" name="status">
+                    <option value="0" ${
+                      item.status == 0 && "selected"
+                    }>0</option>
+                    <option value="1" ${
+                      item.status == 1 && "selected"
+                    }>1</option>
+                  </select>
+                </div>
+                <div class="xl_15">
+                  <button id="${
+                    item.id
+                  }" class="btn btn_save" data-save>Сохранить</button>
+                </div>
+              </form>`
+            )
+            .join("")
+        : "<div class='xl_100 tac'>пользователей нет</div>"
+    }`
+  }
+
+  userScript() {
+    return `
+      <script>
+        const myFetch = async (url, data = [], method = "POST") => {
+          try {
+            let response = await fetch(url, {
+              method: method,
+              headers: {
+                "Content-Type": "application/json;charset=utf-8",
+              },
+              body: JSON.stringify(data),
+            })
+            if (response != undefined) {
+              let result = await response.json()
+              return result
+            } else {
+              return alert("Ошибка подключения к _серверу!")
+            }
+          } catch (error) {
+            console.log("error", error)
+            alert("Ошибка подключения к серверу!")
+          }
+        }
+
+      const func = async (event) => {
+        event.preventDefault();
+
+          if (event.target.dataset.save != undefined || event.target.dataset.add != undefined) { 
+
+            let btn = event.target
+            let data =  {
+              id: btn.id,
+              fio: document.querySelector('#form_'+btn.id+' [name="fio"]').value,
+              post: document.querySelector('#form_'+btn.id+' [name="post"]').value,
+              groupDop: document.querySelector('#form_'+btn.id+' [name="groupDop"]').value,
+              status: document.querySelector('#form_'+btn.id+' [name="status"]').value
+            }
+            let msg = btn.id == 0 
+              ? "Добавить пользователя: " + data.fio + " ?"
+              : "Вы точно хотите сохранить изменения у " + data.fio
+            let modalRes = confirm(msg)
+            if (modalRes) {
+              let url = btn.id == 0 ? "/addUser" : "/updateUser"
+              let res = await myFetch('http://${this.hostname}'+url, data)
+              console.log('res', res)
+              if (res?.status == 1) {
+                  document.location.reload();
+                } else {
+                  alert(res.msg)
+                }
+            }
+
+          }
+      }
+
+      document.addEventListener('click', func, false)
+
+      </script>
+    `
+  }
+
+  get users() {
+    let html = head(this.title)
+
+    html += `<div id="wr_users">
+              <div class="user flex jscb aic">
+                <div class="xl_10">id</div>
+                <div class="xl_20">ФИО</div>
+                <div class="xl_20">Должность</div>
+                <div class="xl_20">Гр. доп.</div>
+                <div class="xl_15">Статус</div>
+                <div class="xl_15"></div>
+              </div>`
+    html += this.trUser()
+    html += `
+              <form id="form_0" class="user flex jscb aic">
+                <div class="xl_10"></div>
+                <div class="xl_20"><input name="fio" type="text" class="input_text" value=""></div>
+                <div class="xl_20">
+                  <select class="select" name="post">
+                    <option value="0">электромонтер</option>
+                    <option value="1">мастер</option>
+                  </select>
+                </div>
+                <div class="xl_20"><input  name="groupDop" type="text" class="input_text gd" value=""></div>
+                <div class="xl_15">
+                  <select class="select" name="status">
+                    <option value="0" >0</option>
+                    <option value="1" >1</option>
+                  </select>
+                </div>
+                <div class="xl_15">
+                  <button id="0" class="btn btn_add" data-add>Добавить</button>
+                </div>
+              </form>`
+    html += "</div>"
+
+    html += this.userScript()
+    html += "</div></body></html>"
+
+    // html += this.getScript()
+    return html
+  }
+  // //////////////////////////////////////
 
   header(dd, type) {
     let html = `

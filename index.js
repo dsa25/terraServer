@@ -11,8 +11,8 @@ app.register(require("@fastify/cors"))
 app.register((app, opts, done) => {
   app.post("/users", mainController.getUsers)
   app.post("/addUser", mainController.addUser)
-  app.post("/addAllUser", mainController.addAllUser)
   app.post("/updateUser", mainController.updateUser)
+  app.post("/addAllUser", mainController.addAllUser)
 
   app.post("/addInspect", mainController.addInspect)
   app.post("/updateInspect", mainController.updateInspect)
@@ -24,6 +24,7 @@ app.register((app, opts, done) => {
 
   app.get("/list", mainController.getListInspect)
   app.get("/list/:id", mainController.getInspect)
+  app.get("/users", mainController.getFormUsers)
 
   app.get("/", async (req, reply) => {
     try {

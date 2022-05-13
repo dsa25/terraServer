@@ -72,6 +72,7 @@ module.exports = function header(title) {
         .xl_35{width: 35%}
         .xl_20{width: 20%}
         .xl_15{width: 15%}
+        .xl_10{width: 10%}
 
         .mt_10{margin-top: 10px;}
 
@@ -288,6 +289,7 @@ module.exports = function header(title) {
       .input_text#id{width: 30px;}
       .input_text#date{width: 80px;}
       .input_text#tprp{width: 40px;}
+      .input_text.gd{width: 60px;}
 
       .btn{
         display: inline-block;
@@ -295,7 +297,15 @@ module.exports = function header(title) {
         cursor: pointer;
       }
 
-
+      .user{text-align: center;}
+      .user > div{
+          padding: 10px 5px;          
+      }
+      .select{
+        padding: 2px 5px;
+        max-width: 100%;
+        width: 140px;
+      }
 
     @media print {
         * {

@@ -34,11 +34,25 @@ class mainController {
           })
         )
       }
+      if (
+        req.body.fio.trim().length == 0 ||
+        req.body.groupDop.trim().length == 0 ||
+        req.body.status == undefined ||
+        req.body.post == undefined
+      ) {
+        reply.send(
+          JSON.stringify({
+            status: 0,
+            body: {},
+            msg: "не все поля заполнены!",
+          })
+        )
+        return
+      }
       let args = [
-        // req.body.id,
-        req.body.fio,
+        req.body.fio.trim(),
         req.body.post,
-        req.body.groupDop,
+        req.body.groupDop.trim(),
         req.body.status,
       ]
       let sql =
@@ -127,10 +141,25 @@ class mainController {
           })
         )
       }
+      if (
+        req.body.fio.trim().length == 0 ||
+        req.body.groupDop.trim().length == 0 ||
+        req.body.status == undefined ||
+        req.body.id == undefined ||
+        req.body.post == undefined
+      ) {
+        reply.send(
+          JSON.stringify({
+            status: 0,
+            body: {},
+            msg: "не все поля заполнены!",
+          })
+        )
+      }
       let args = [
-        req.body.fio,
+        req.body.fio.trim(),
         req.body.post,
-        req.body.groupDop,
+        req.body.groupDop.trim(),
         req.body.status,
         req.body.id,
       ]
@@ -292,6 +321,23 @@ class mainController {
         req.url
       )
       reply.type("text/html").send(html.listInspects)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async getFormUsers(req, reply) {
+    try {
+      let sql = "SELECT * FROM `users` "
+      let db = await opn()
+      let users = await db.all(sql)
+      let html = new pageController(
+        "Пользователи",
+        users,
+        req.hostname,
+        req.url
+      )
+      reply.type("text/html").send(html.users)
     } catch (error) {
       console.log(error)
     }
