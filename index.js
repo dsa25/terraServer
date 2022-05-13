@@ -3,7 +3,8 @@ const app = require("fastify")({ trustProxy: true, logger: false })
 // const { pool } = require("./database/db")
 const { opn } = require("./database/db")
 const PORT = process.env.PORT || 80
-const IP = process.env.IP || "192.168.0.103"
+// const IP = process.env.IP || "192.168.0.103"
+const IP = process.env.IP || "0.0.0.0"
 const mainController = require("./mainController")
 
 app.register(require("@fastify/cors"))
