@@ -124,7 +124,7 @@ function throttle(func, ms) {
           <th>№</th>
           <th>Дата</th>
           <th>ФИО</th>
-          <th>Адресс</th>
+          <th>Адрес</th>
           <th>ТП(РП)</th>
           <th>Тип</th>
           <th>Файл</th>
@@ -161,7 +161,7 @@ function throttle(func, ms) {
                 </div>
               </div>
             </td>
-            <td><a href="${this.url}/${
+            <td><a href="http://${this.hostname}/list/${
                 item.id
               }">file</a> <span style="font-size: 12px;">v:${item.v}</span></td>
         </tr>`

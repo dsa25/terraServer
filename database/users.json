@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "fio": "Харитонов Д. Г.",
+    "post": 1,
+    "groupDop": "5",
+    "status": 1
+  },
+  {
+    "id": 2,
+    "fio": "Швецов А. В.",
+    "post": 1,
+    "groupDop": "5",
+    "status": 1
+  },
+  {
+    "id": 3,
+    "fio": "Кожевников А. Н.",
+    "post": 1,
+    "groupDop": "5",
+    "status": 1
+  },
+  {
+    "id": 4,
+    "fio": "Варфоломеев Е. Н.",
+    "post": 1,
+    "groupDop": "5",
+    "status": 1
+  },
+  {
+    "id": 5,
+    "fio": "Демченко В. А.",
+    "post": 0,
+    "groupDop": "4",
+    "status": 1
+  },
+  {
+    "id": 6,
+    "fio": "Черницов Н. А.",
+    "post": 0,
+    "groupDop": "4",
+    "status": 1
+  },
+  {
+    "id": 7,
+    "fio": "Кислицин Н. О.",
+    "post": 0,
+    "groupDop": "4",
+    "status": 1
+  },
+  {
+    "id": 8,
+    "fio": "Барсуков Н. П.",
+    "post": 0,
+    "groupDop": "3",
+    "status": 1
+  },
+  {
+    "id": 9,
+    "fio": "Хохлов Д. М.",
+    "post": 0,
+    "groupDop": "3",
+    "status": 1
+  },
+  {
+    "id": 10,
+    "fio": "Кательников В. И.",
+    "post": 0,
+    "groupDop": "3",
+    "status": 1
+  }
+]
