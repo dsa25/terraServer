@@ -658,7 +658,11 @@ function throttle(func, ms) {
       html += this.blankMeasur(DL.measurements)
     } else {
       html += this.quests(DL.quests)
-      if (this.list.measur === 1) html += this.blankMeasur(DL.measurements)
+      if (this.list.measur === 1) {
+        html += '<div id="blank_zamerov">'
+        html += this.blankMeasur(DL.measurements)
+        html += "</div>"
+      }
     }
 
     html += this.delegation(DL.delegation.users)
