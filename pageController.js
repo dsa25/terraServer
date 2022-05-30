@@ -587,7 +587,12 @@ function throttle(func, ms) {
 
     if (answer.type == "listTextInput") {
       return `
-      <div>${answer.text} </div>
+      <div style='margin-bottom: 12px;'>
+        <input type="checkbox" disabled class="checkbox" ${
+          answer.check == true ? "checked" : ""
+        }>
+        <label>${answer.text}</label>
+      </div>
       ${answer.list
         .map(
           (item) =>
