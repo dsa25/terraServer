@@ -9,6 +9,12 @@ const mainController = require("./mainController")
 
 app.register(require("@fastify/cors"))
 
+const path = require("path")
+app.register(require("fastify-static"), {
+  root: path.join(__dirname, "/public"),
+  prefix: "/apk/",
+})
+
 app.register((app, opts, done) => {
   app.post("/users", mainController.getUsers)
   app.post("/addUser", mainController.addUser)
@@ -25,6 +31,7 @@ app.register((app, opts, done) => {
 
   app.get("/list", mainController.getListInspect)
   app.get("/list/:id", mainController.getInspect)
+  app.get("/list/del/:id", mainController.delInspect)
   app.get("/users", mainController.getFormUsers)
 
   app.get("/", async (req, reply) => {

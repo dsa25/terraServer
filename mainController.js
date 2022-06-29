@@ -305,6 +305,23 @@ class mainController {
     }
   }
 
+  async delInspect(req, reply) {
+    try {
+      console.log("del", req.params.id)
+      let sql = "delete FROM `inspections` WHERE id = ?"
+      let db = await opn()
+      await db.get(sql, [req.params.id])
+      reply.send(
+        JSON.stringify({
+          status: 1,
+          msg: "Удалена запись:" + req.params.id,
+        })
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async getListInspect(req, reply) {
     try {
       console.log(req.ip)
