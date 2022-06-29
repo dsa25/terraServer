@@ -10,7 +10,7 @@ const mainController = require("./mainController")
 app.register(require("@fastify/cors"))
 
 const path = require("path")
-app.register(require("fastify-static"), {
+app.register(require("@fastify/static"), {
   root: path.join(__dirname, "/public"),
   prefix: "/apk/",
 })
@@ -53,13 +53,18 @@ let time = new Date()
 
 const start = async () => {
   try {
+    console.log("env:", PORT)
     // await pool.getConnection()
     let db = await opn()
     console.log("db", db)
-    await app.listen(PORT, IP, (err, address) => {
+    await app.listen({ port: PORT, host: IP }, (err, address) => {
       console.log(
         `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()} server: ${address}`
       )
+      if (err) {
+        fastify.log.error(err)
+        process.exit(1)
+      }
     })
   } catch (err) {
     app.log.error(err)
