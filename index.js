@@ -53,7 +53,6 @@ let time = new Date()
 
 const start = async () => {
   try {
-    console.log("env:", PORT)
     // await pool.getConnection()
     let db = await opn()
     console.log("db", db)

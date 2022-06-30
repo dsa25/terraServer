@@ -202,12 +202,24 @@ function throttle(func, ms) {
                 }"></div>
                 <div class="xl_20">
                   <select class="select" name="post">
-                    <option value="0" ${
-                      item.post == 0 && "selected"
-                    }>электромонтер</option>
                     <option value="1" ${
                       item.post == 1 && "selected"
                     }>мастер</option>
+                    <option value="2" ${
+                      item.post == 2 && "selected"
+                    }>электромонтер</option>
+                    <option value="3" ${
+                      item.post == 3 && "selected"
+                    }>инженер ПТО</option>
+                    <option value="4" ${
+                      item.post == 4 && "selected"
+                    }>начальник ПТО</option>
+                    <option value="5" ${
+                      item.post == 5 && "selected"
+                    }>ОБиУЭЭ</option>
+                    <option value="6" ${
+                      item.post == 6 && "selected"
+                    }>ОТП</option>
                   </select>
                 </div>
                 <div class="xl_20"><input  name="groupDop" type="text" class="input_text gd" value="${
@@ -299,6 +311,12 @@ function throttle(func, ms) {
   get users() {
     let html = head(this.title)
 
+    html += `<div class="" style="color: red;font-size: 12px;">
+      <p>* Нельзя менять ФИО одного пользователя на другого! Иначе будет путаница в участниках прошлых осмотров</p>
+      <p>* Если нужен новый - добавляем его</p>
+      <p>* Если нужно убрать(удалить) из списка в приложении - меняем статус на 0</p>
+    </div>`
+
     html += `<div id="wr_users">
               <div class="user flex jscb aic">
                 <div class="xl_10">id</div>
@@ -315,8 +333,12 @@ function throttle(func, ms) {
                 <div class="xl_20"><input name="fio" type="text" class="input_text" value=""></div>
                 <div class="xl_20">
                   <select class="select" name="post">
-                    <option value="0">электромонтер</option>
                     <option value="1">мастер</option>
+                    <option value="2">электромонтер</option>
+                    <option value="3">инженер ПТО</option>
+                    <option value="4">начальник ПТО</option>
+                    <option value="5">ОБиУЭЭ</option>
+                    <option value="6">ОТП</option>
                   </select>
                 </div>
                 <div class="xl_20"><input  name="groupDop" type="text" class="input_text gd" value=""></div>
@@ -381,6 +403,16 @@ function throttle(func, ms) {
     return html
   }
 
+  getPost(number) {
+    if (number == 1) return "мастер"
+    if (number == 2) return "электромонтер"
+    if (number == 3) return "инженер ПТО"
+    if (number == 4) return "начальник ПТО"
+    if (number == 5) return "ОБиУЭЭ"
+    if (number == 6) return "ОТП"
+    return ""
+  }
+
   delegation(users) {
     let html = `
       <section class="delegation">
@@ -391,9 +423,9 @@ function throttle(func, ms) {
             <div class="flex jcsb aifs mt_10">
               <span class="xl_20 bb_text" data-text="Ф.И.О.">${item.fio}</span>
               <span class="xl_20 bb_text bbe" data-text="подпись">.</span>
-              <span class="xl_20 bb_text" data-text="должность">
-                ${users.master.post === "1" ? "мастер" : "электромонтер"}
-              </span>
+              <span class="xl_20 bb_text" data-text="должность">${this.getPost(
+                item.post
+              )}</span>
               <span class="xl_20 bb_text" data-text="группа допуска">
                 ${item.groupDop}
               </span>
@@ -408,7 +440,7 @@ function throttle(func, ms) {
           </span>
           <span class="xl_20 bb_text bbe" data-text="подпись">.</span>
           <span class="xl_20 bb_text" data-text="должность">
-            ${users.master.post == "1" ? "мастер" : "электромонтер"}
+            ${this.getPost(users.master.post)}
           </span>
           <span class="xl_20 bb_text" data-text="группа допуска">
             ${users.master.groupDop}
