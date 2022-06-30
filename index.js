@@ -23,6 +23,8 @@ app.register((app, opts, done) => {
 
   app.post("/addInspect", mainController.addInspect)
   app.post("/updateInspect", mainController.updateInspect)
+  app.post("/deleteInspect", mainController.deleteInspect)
+  app.post("/unDeleteInspect", mainController.unDeleteInspect)
   app.post("/allInspects", mainController.allInspects)
   app.post("/filterInspects", mainController.filterInspects)
   // app.post("/allNewInspects", mainController.allNewInspects)
@@ -31,7 +33,6 @@ app.register((app, opts, done) => {
 
   app.get("/list", mainController.getListInspect)
   app.get("/list/:id", mainController.getInspect)
-  app.get("/list/del/:id", mainController.delInspect)
   app.get("/users", mainController.getFormUsers)
 
   app.get("/", async (req, reply) => {

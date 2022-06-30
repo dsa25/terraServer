@@ -53,6 +53,11 @@ const Inspection = sequelize.define(
     file: {
       type: DataTypes.STRING,
     },
+    active: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
   },
   { timestamps: false }
 )

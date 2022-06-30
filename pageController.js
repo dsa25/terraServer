@@ -115,6 +115,37 @@ function throttle(func, ms) {
         }
         events()
 
+        // ******************delete osmotr******************
+        const funcDel = async (event) => {
+          
+          if (event.target.dataset.del != undefined ) { 
+            event.preventDefault();
+
+            let btn = event.target
+            let data =  {
+              id: btn.id
+            }
+            console.log(data)
+            let msg = "Вы точно хотите удалить осмотр №" + data.id + " " + btn.dataset.address + "?"
+            let modalRes = confirm(msg)
+            if (modalRes) {
+              console.log('ok')
+              let url = "/deleteInspect"
+              let res = await myFetch('http://${this.hostname}'+url, data)
+              console.log('res', res)
+              if (res?.status == 1) {
+                  document.location.reload();
+                } else {
+                  alert(res.msg)
+                }
+            }
+            }
+
+          }
+
+      document.addEventListener('click', funcDel, false)
+
+
       </script>
     `
   }
@@ -128,6 +159,7 @@ function throttle(func, ms) {
           <th>ТП(РП)</th>
           <th>Тип</th>
           <th>Файл</th>
+          <th></th>
         </tr>
         <tr>
           <td><input id="id" class="input_text" type="text" value=""></td>
@@ -135,7 +167,7 @@ function throttle(func, ms) {
           <td><input id="fio" class="input_text" type="text" value=""></td>
           <td><input id="address" class="input_text" type="text" value=""></td>
           <td><input id="tprp" class="input_text" type="text" value=""></td>
-          <td colspan="2"><button id='btn' class="btn" >применить</button></td>
+          <td colspan="3"><button id='btn' class="btn" >применить</button></td>
         </tr>`
   }
 
@@ -163,7 +195,14 @@ function throttle(func, ms) {
             </td>
             <td><a href="http://${this.hostname}/list/${
                 item.id
-              }">file</a> <span style="font-size: 12px;">v:${item.v}</span></td>
+              }" target="_blank">file</a> <span style="font-size: 12px;">v:${
+                item.v
+              }</span></td>
+            <td><button id="${
+              item.id
+            }" class="btn btn_del" data-del data-address="${
+                item.address
+              }" title="удалить">х</button></td>
         </tr>`
             )
             .join("")

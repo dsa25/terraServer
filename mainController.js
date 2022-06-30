@@ -253,6 +253,18 @@ class mainController {
           })
         )
       }
+      let db = await opn()
+      let sql1 = "SELECT * FROM `inspections` WHERE active = 1 AND id = ?"
+      let find = await db.all(sql1, [req.body.id])
+      if (find.length == 0) {
+        reply.send(
+          JSON.stringify({
+            status: 0,
+            body: {},
+            msg: "Осмотр был удален админом!",
+          })
+        )
+      }
       let DL = JSON.stringify(req.body.DL)
       let args = [
         req.body.type,
@@ -269,7 +281,6 @@ class mainController {
       ]
       let sql =
         "UPDATE inspections SET type= ?, v= ?, date= ?, status= ?, fio= ?, keyLS= ?, address= ?,  tprp= ?, measur= ?, DL= ? WHERE id= ?"
-      let db = await opn()
       let res = await db.run(sql, args)
       if (res && res?.changes == 1) {
         reply.send(
@@ -295,7 +306,7 @@ class mainController {
   async getInspect(req, reply) {
     try {
       console.log(req.params.id)
-      let sql = "SELECT * FROM `inspections` WHERE id = ?"
+      let sql = "SELECT * FROM `inspections` WHERE id = ? AND active = 1"
       let db = await opn()
       let inspection = await db.get(sql, [req.params.id])
       let html = new pageController("осмотр", inspection, req.hostname, req.url)
@@ -305,18 +316,56 @@ class mainController {
     }
   }
 
-  async delInspect(req, reply) {
+  async deleteInspect(req, reply) {
     try {
-      console.log("del", req.params.id)
-      let sql = "delete FROM `inspections` WHERE id = ?"
+      let sql = "UPDATE inspections SET active = 0 WHERE id= ?"
       let db = await opn()
-      await db.get(sql, [req.params.id])
-      reply.send(
-        JSON.stringify({
-          status: 1,
-          msg: "Удалена запись:" + req.params.id,
-        })
-      )
+      let del = await db.run(sql, [req.body.id])
+      console.log("del", del)
+      if (del && del?.changes == 1) {
+        reply.send(
+          JSON.stringify({
+            status: 1,
+            body: {},
+            msg: "Удалена запись:" + req.body.id,
+          })
+        )
+      } else {
+        reply.send(
+          JSON.stringify({
+            status: 0,
+            body: {},
+            msg: "Что то пошло не так!",
+          })
+        )
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async unDeleteInspect(req, reply) {
+    try {
+      let sql = "UPDATE inspections SET active = 1 WHERE id= ?"
+      let db = await opn()
+      let del = await db.run(sql, [req.body.id])
+      if (del && del?.changes == 1) {
+        reply.send(
+          JSON.stringify({
+            status: 1,
+            body: {},
+            msg: "Восстановлена запись:" + req.body.id,
+          })
+        )
+      } else {
+        reply.send(
+          JSON.stringify({
+            status: 0,
+            body: {},
+            msg: "Что то пошло не так!",
+          })
+        )
+      }
     } catch (error) {
       console.log(error)
     }
@@ -328,7 +377,7 @@ class mainController {
       console.log(req.hostname)
       console.log(req.url)
       let sql =
-        "SELECT id, type, date, v, fio, keyLS, address, tprp, measur FROM `inspections` ORDER BY `id` DESC"
+        "SELECT id, type, date, v, fio, keyLS, address, tprp, measur FROM `inspections` WHERE active = 1 ORDER BY `id` DESC"
       let db = await opn()
       let listInspects = await db.all(sql)
       let html = new pageController(
@@ -411,7 +460,7 @@ class mainController {
       if (tprp != "") likes.push(`tprp LIKE '%${tprp}%'`)
 
       let filter = likes.join(" AND ")
-      if (filter != "") filter = `WHERE ${filter}`
+      if (filter != "") filter = `WHERE active = 1 AND ${filter}`
 
       let sql = `SELECT id, type, date, v, fio, keyLS, address, tprp, measur FROM inspections ${filter} ORDER BY id DESC`
       let db = await opn()
