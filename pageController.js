@@ -424,6 +424,7 @@ function throttle(func, ms) {
     }</span></p>
         <p>Напряжение: 
           ${dd.fields[2].label} <span class="bb">${dd.fields[2].input}</span>
+          <br>
           ${dd.fields[3].label} <span class="bb">${dd.fields[3].input}</span>
         </p>
         <p>${dd.fields[4].label} <span class="bb">${
@@ -434,7 +435,7 @@ function throttle(func, ms) {
       <div class="tar">
         <p>Согласовано: </p>
         <p>Директор ООО "Терра"</p>
-        <p style="margin-top: 18px;"><span class="dib bb bbe mw_100">1</span> Коваленко А.В.</p>
+        <p style="margin-top: 18px; white-space: nowrap;"><span class="dib bb bbe mw_100">1</span> Аблицов А.В.</p>
       </div>
 
     </header>
@@ -519,17 +520,17 @@ function throttle(func, ms) {
                             <td class="xl_15 wsnw">A-B</td>
                             <td class="xl_35">${input[1]}</td>
                             <td class="xl_15 wsnw">A-N</td>
-                            <td class="xl_35">${input[2]}</td>
-                        </tr>
-                        <tr>
-                            <td class="xl_15 wsnw">B-C</td>
-                            <td class="xl_35">${input[3]}</td>
-                            <td class="xl_15 wsnw">B-N</td>
                             <td class="xl_35">${input[4]}</td>
                         </tr>
                         <tr>
-                            <td class="xl_15 wsnw">C-A</td>
+                            <td class="xl_15 wsnw">B-C</td>
+                            <td class="xl_35">${input[2]}</td>
+                            <td class="xl_15 wsnw">B-N</td>
                             <td class="xl_35">${input[5]}</td>
+                        </tr>
+                        <tr>
+                            <td class="xl_15 wsnw">C-A</td>
+                            <td class="xl_35">${input[3]}</td>
                             <td class="xl_15 wsnw">C-N</td>
                             <td class="xl_35">${input[6]}</td>
                         </tr>
