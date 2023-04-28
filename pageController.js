@@ -434,8 +434,8 @@ function throttle(func, ms) {
 
       <div class="tar">
         <p>Согласовано: </p>
-        <p>Директор ООО "Терра"</p>
-        <p style="margin-top: 18px; white-space: nowrap;"><span class="dib bb bbe mw_100">1</span> Аблицов А.В.</p>
+        <p>Директор "Terra Nova"</p>
+        <p style="margin-top: 18px; white-space: nowrap;"><span class="dib bb bbe mw_100">1</span> Иванов И.И.</p>
       </div>
 
     </header>
