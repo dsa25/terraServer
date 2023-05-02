@@ -92,8 +92,7 @@ function throttle(func, ms) {
               address: address.value,
               tprp: tprp.value
             }
-        
-              let res = await myFetch("http://${this.hostname}/filterInspects", data)
+              let res = await myFetch("/filterInspects", data)
               if (res?.status == 1) {
                 while (table.rows.length > 2) {
                   table.deleteRow(2);
@@ -130,8 +129,7 @@ function throttle(func, ms) {
             let modalRes = confirm(msg)
             if (modalRes) {
               console.log('ok')
-              let url = "/deleteInspect"
-              let res = await myFetch('http://${this.hostname}'+url, data)
+              let res = await myFetch("/deleteInspect", data)
               console.log('res', res)
               if (res?.status == 1) {
                   document.location.reload();
@@ -329,7 +327,7 @@ function throttle(func, ms) {
             let modalRes = confirm(msg)
             if (modalRes) {
               let url = btn.id == 0 ? "/addUser" : "/updateUser"
-              let res = await myFetch('http://${this.hostname}'+url, data)
+              let res = await myFetch(url, data)
               console.log('res', res)
               if (res?.status == 1) {
                   document.location.reload();
